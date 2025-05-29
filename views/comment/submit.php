@@ -14,8 +14,9 @@ if (!empty($_POST['contenu'])) {
     $commentTable->initCommentStatus();
     
 
-    $username = htmlspecialchars($_POST['username'] ?? 'Anonyme');
-    $contenu = htmlspecialchars($_POST['contenu']);
+    // Seulement filtrer contre les injections SQL, pas d'encodage HTML ici
+    $username = $_POST['username'] ?? 'Anonyme';
+    $contenu = $_POST['contenu'];
 
     $userId = 0; 
     if (session_status() === PHP_SESSION_NONE) {
@@ -28,7 +29,7 @@ if (!empty($_POST['contenu'])) {
     }
     
 
-    $result = $commentTable->createComment($articleId, $contenu, $userId);
+    $result = $commentTable->createComment($articleId, $contenu, $userId, $username);
     
 
     if ($result) {

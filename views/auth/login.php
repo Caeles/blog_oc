@@ -9,13 +9,16 @@ use App\Table\UserTable;
 $user = new User();
 $errors = [];
 if(!empty($_POST)){
-    $user->setUsername($_POST['username']);
-    $errors['password'] = 'Identifiant ou mot de passe incorrect';
-
-    if(!empty($_POST['username']) && !empty($_POST['password'])){
+    if(isset($_POST['email'])) {
+        $user->setEmail($_POST['email']);
+    }
+    
+    $errors['password'] = 'Email ou mot de passe incorrect';
+    
+    if(!empty($_POST['email']) && !empty($_POST['password'])){
         $table = new UserTable(Connection::getPDO());
         try{
-            $u = $table->findByusername($_POST['username']);
+            $u = $table->findByUser($_POST['email']);
             if (password_verify($_POST['password'], $u->getPassword()) ===  true){
                 session_start();
                 $_SESSION['auth'] = $u->getID();
@@ -23,8 +26,8 @@ if(!empty($_POST)){
                 exit();
             }   
 
-        }catch(NotFoundException){
-            $errors['passsword']="Identifiant ou mot de passe incorrect";
+        }catch(Exception $e){
+            $errors['password']="Email ou mot de passe incorrect";
         }
     }
 }
@@ -42,7 +45,7 @@ $form = new Form($user, $errors);
 <?php } ?>
 
 <form action="<?= $router->url('login') ?>" method="POST">
-    <?= $form->input('username', 'Nom d\'utilisateur') ?>
+    <?= $form->input('email', 'Email') ?>
     <?= $form->input('password', 'Mot de passe')?>
     <div class="mb-3"></div>
     <button type="submit" class="btn btn-primary">Se connecter</button>

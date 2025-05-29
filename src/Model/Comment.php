@@ -11,7 +11,9 @@ class Comment
     private $status_id;
     private $contenu;
     private $created_at;
-    private $username; 
+    private $username;
+    private $article_title;
+    private $nom; 
 
     public function getId(): ?int
     {
@@ -43,7 +45,9 @@ class Comment
         if ($this->contenu === null) {
             return null;
         }
-        return nl2br(htmlentities($this->contenu));
+        // Appliquer seulement nl2br pour les sauts de ligne, sans htmlentities
+        // pour u00e9viter le double encodage des caractu00e8res spu00e9ciaux
+        return nl2br($this->contenu);
     }
 
     public function getCreatedAt(): \DateTime
@@ -95,6 +99,40 @@ class Comment
     public function setUsername(string $username): self
     {
         $this->username = $username;
+        return $this;
+    }
+
+    public function getArticleTitle(): ?string
+    {
+        return $this->article_title;
+    }
+
+    public function setArticleTitle(string $article_title): self
+    {
+        $this->article_title = $article_title;
+        return $this;
+    }
+
+    /**
+     * Get the value of nom
+     *
+     * @return  string|null
+     */
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set the value of nom
+     *
+     * @param  string  $nom
+     *
+     * @return  self
+     */
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
         return $this;
     }
 }

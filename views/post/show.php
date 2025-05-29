@@ -110,7 +110,7 @@ if (method_exists($post, 'getAuthorId')) {
             <?php foreach ($comments as $comment): ?>
                 <div class="comment card mb-3">
                     <div class="card-body">
-                        <h5 class="card-title"><?= htmlentities($comment->getUsername() ?? 'Anonyme') ?></h5>
+                        <h5 class="card-title"><?= htmlspecialchars($comment->getNom() ?? 'Anonyme') ?></h5>
                         <h6 class="card-subtitle mb-2 text-muted">
                             <?php
                             $dateTime = $comment->getCreatedAt();
@@ -125,7 +125,7 @@ if (method_exists($post, 'getAuthorId')) {
                             echo $formatter->format($dateTime);
                             ?>
                         </h6>
-                        <p class="card-text"><?= nl2br(htmlentities($comment->getContenu())) ?></p>
+                        <p class="card-text"><?= $comment->getFormattedContenu() ?></p>
                     </div>
                 </div>
             <?php endforeach; ?>

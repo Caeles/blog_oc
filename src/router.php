@@ -12,6 +12,11 @@ class   Router {
      * @var \ALtoRouter
      */
     private $router;
+
+    /**
+     * @var string
+     */
+    public $layout;
     public function __construct(string $viewPath){
         $this->viewPath = $viewPath;
         $this->router = new \AltoRouter();

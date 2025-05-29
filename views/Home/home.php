@@ -101,7 +101,7 @@ Ma passion pour la résolution de problèmes me pousse à imaginer des solutions
             </div>
             <div class="col-md-4 mb-4">
                 <img src="assets/portfolio2.jpg" class="img-fluid rounded shadow-sm">
-            </div>
+        -    </div>
             <div class="col-md-4 mb-4">
                 <img src="assets/portfolio3.jpg" class="img-fluid rounded shadow-sm">
             </div>
@@ -114,10 +114,26 @@ Ma passion pour la résolution de problèmes me pousse à imaginer des solutions
     <!-- Contact -->
     <section id="contact" class="container py-5">
         <h2 class="section-title">Contact</h2>
-        <form>
-            <input type="text" class="form-control mb-3" placeholder="Nom">
-            <input type="email" class="form-control mb-3" placeholder="E-mail">
-            <textarea class="form-control mb-3" placeholder="Votre Message" rows="5"></textarea>
+        <?php if(isset($_GET['sent']) && $_GET['sent'] == 1): ?>
+        <div class="alert alert-success" role="alert">
+            Votre message a bien été envoyé. Nous vous répondrons dans les plus brefs délais.
+        </div>
+        <?php elseif(isset($_GET['error'])): ?>
+        <div class="alert alert-danger" role="alert">
+            <?php if($_GET['error'] == 1): ?>
+                Tous les champs du formulaire sont obligatoires.
+            <?php elseif($_GET['error'] == 2): ?>
+                Une erreur s'est produite lors de l'envoi du message. Veuillez réessayer ultérieurement.
+            <?php else: ?>
+                Une erreur s'est produite. Veuillez réessayer.
+            <?php endif; ?>
+        </div>
+        <?php endif; ?>
+        <form action="/src/Actions/send_form.php" method="POST">
+            <input type="text" name="nom" class="form-control mb-3" placeholder="Nom" required>
+            <input type="email" name="email" class="form-control mb-3" placeholder="E-mail" required>
+            <input type="text" name="sujet" class="form-control mb-3" placeholder="Sujet" required>
+            <textarea name="message" class="form-control mb-3" placeholder="Votre Message" rows="5" required></textarea>
             <button class="btn btn-primary" type="submit">Envoyer</button>
         </form>
     </section>

@@ -13,7 +13,7 @@ if ($checkTable->rowCount() === 0) {
 }
 
 
-$statuses = ['pending', 'approved', 'rejected'];
+$statuses = ['pending', 'published', 'rejected'];
 foreach ($statuses as $status) {
     $checkStatus = $pdo->prepare("SELECT COUNT(*) FROM comment_status WHERE value = ?");
     $checkStatus->execute([$status]);
@@ -25,19 +25,25 @@ foreach ($statuses as $status) {
 }
 
 
-$approvedQuery = $pdo->prepare("SELECT id FROM comment_status WHERE value = 'approved'");
-$approvedQuery->execute();
-$approvedId = $approvedQuery->fetchColumn();
+$publishedQuery = $pdo->prepare("SELECT id FROM comment_status WHERE value = 'published'");
+$publishedQuery->execute();
+$publishedId = $publishedQuery->fetchColumn();
 
-if ($approvedId) {
+if ($publishedId) {
 
+    /**
+     * Mise à jour des commentaires sans statut
+     */
     $updateQuery = $pdo->prepare("UPDATE comment SET status_id = ? WHERE status_id IS NULL OR status_id = 0");
-    $updateQuery->execute([$approvedId]);
+    $updateQuery->execute([$publishedId]);
     $updated = $updateQuery->rowCount();
     
-    echo "<p>{$updated} commentaires ont u00e9tu00e9 approuvu00e9s.</p>";
+    echo "<p>{$updated} commentaires ont été publiés.</p>";
     
 
+    /**
+     * Affichage des statistiques des commentaires
+     */
     $countQuery = $pdo->query("SELECT cs.value, COUNT(c.id) as count FROM comment c JOIN comment_status cs ON c.status_id = cs.id GROUP BY cs.value");
     echo "<p>Statistiques des commentaires :</p><ul>";
     while ($row = $countQuery->fetch(PDO::FETCH_ASSOC)) {
@@ -47,5 +53,5 @@ if ($approvedId) {
     
     echo "<p><a href='/blog'>Retourner au blog</a></p>";
 } else {
-    echo "<p>Erreur: Impossible de trouver le statut 'approved'.</p>";
+    echo "<p>Erreur: Impossible de trouver le statut 'published'.</p>";
 }

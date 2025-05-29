@@ -33,6 +33,11 @@ $router
         ->get('/admin/comments', 'admin/comment/index', 'admin_comments')
         ->post('/admin/comment/[i:id]/approve', 'admin/comment/approve', 'admin_comment_approve')
         ->post('/admin/comment/[i:id]/reject', 'admin/comment/reject', 'admin_comment_reject')
+        //Gestion des utilisateurs
+        ->get('/admin/users', 'admin/user/index', 'admin_users')
+        ->match('/admin/user/new', 'admin/user/new', 'admin_user_new')
+        ->match('/admin/user/[i:id]', 'admin/user/edit', 'admin_user_edit')
+        ->post('/admin/user/[i:id]/delete', 'admin/user/delete', 'admin_user_delete')
         -> run();
 function e(string $string): string
 {

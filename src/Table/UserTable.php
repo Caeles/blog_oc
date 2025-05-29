@@ -15,10 +15,10 @@ class UserTable extends Table{
     protected $table="user";
     protected $class=User::class;
 
-    public function findByUsername(string $username)
+    public function findByUser(string $email)
     {
-        $query=$this->pdo->prepare("SELECT * FROM {$this->table} WHERE username = :nom");
-        $query->execute(['username'=>$username]);
+        $query=$this->pdo->prepare("SELECT * FROM {$this->table} WHERE email = :email");
+        $query->execute(['email'=>$email]);
         $query->setFetchMode(PDO::FETCH_CLASS,$this->class);
         $result=$query->fetch();
         if($result===false){

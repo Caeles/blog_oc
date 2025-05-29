@@ -31,9 +31,8 @@ class CommentTable extends Table {
         }
 
         $query = $this->pdo->prepare(
-            "SELECT c.*, u.nom, u.prenom 
+            "SELECT c.* 
             FROM {$this->table} c
-            JOIN user u ON c.user_id = u.id
             WHERE c.article_id = :article_id AND c.status_id = :status_id 
             ORDER BY c.created_at DESC"
         );
@@ -51,7 +50,8 @@ class CommentTable extends Table {
             $comment->setStatusId($row['status_id']);
             $comment->setContenu($row['contenu']);
             $comment->setCreatedAt($row['created_at']);
-            $comment->setUsername($row['prenom'] . ' ' . $row['nom']); 
+            $comment->setNom($row['nom']);
+            $comment->setUsername($row['nom']); // Pour maintenir la compatibilité
             $comments[] = $comment;
         }
         
@@ -82,7 +82,7 @@ class CommentTable extends Table {
         return $query->fetchAll();
     }
 
-    public function createComment(int $articleId, string $contenu, int $userId = 0): bool
+    public function createComment(int $articleId, string $contenu, int $userId = 0, string $nom = 'Anonyme'): bool
     {
      
         $statusQuery = $this->pdo->prepare("SELECT id FROM comment_status WHERE value = 'pending'");
@@ -125,14 +125,15 @@ class CommentTable extends Table {
         }
 
         $query = $this->pdo->prepare(
-            "INSERT INTO {$this->table} (article_id, user_id, status_id, contenu) 
-            VALUES (:article_id, :user_id, :status_id, :contenu)"
+            "INSERT INTO {$this->table} (article_id, user_id, status_id, contenu, nom) 
+            VALUES (:article_id, :user_id, :status_id, :contenu, :nom)"
         );
         return $query->execute([
             'article_id' => $articleId,
             'user_id' => $userId,
             'status_id' => $pendingStatusId,
-            'contenu' => $contenu
+            'contenu' => $contenu,
+            'nom' => $nom
         ]);
     }
 
@@ -157,7 +158,7 @@ class CommentTable extends Table {
  
     public function initCommentStatus(): void
     {
-        $statuses = ['pending', 'approved', 'rejected'];
+        $statuses = ['pending', 'published', 'rejected'];
         foreach ($statuses as $status) {
             $query = $this->pdo->prepare("SELECT COUNT(*) FROM comment_status WHERE value = :value");
             $query->execute(['value' => $status]);

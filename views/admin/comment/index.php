@@ -19,9 +19,9 @@ $comments = $commentTable->findPending();
 
 <h1>Gestion des commentaires</h1>
 
-<?php if (isset($_GET['approved']) && $_GET['approved'] == 1): ?>
+<?php if (isset($_GET['published']) && $_GET['published'] == 1): ?>
     <div class="alert alert-success">
-        Le commentaire a été approuvé.
+        Le commentaire a été publié.
     </div>
 <?php endif; ?>
 

@@ -69,19 +69,30 @@ class Form{
         return $invalidFeedback;
     }
     
-    public function select (string $key, string $label, array $options = []): string{
+    public function select (string $key, string $label, array $options = [], bool $multiple = false): string{
         
         $optionsHTML = [];
-        $value = $this->getValue($key); 
+        $value = $this->getValue($key);
+        
+        // Convertir la valeur en tableau si ce n'est pas déjà le cas
+        if (!is_array($value)) {
+            $value = [$value];
+        }
+        
         foreach($options as $k => $v){
-            $selected = in_array( $k, $value) ? " selected" : "";
+            $selected = in_array($k, $value) ? " selected" : "";
             $optionsHTML[] = "<option value=\"$k\"$selected>$v</option>" ;
         }
         $optionsHTML = implode('', $optionsHTML);
+        
+        // Modifier le nom et les attributs en fonction de si c'est un select multiple ou non
+        $multipleAttr = $multiple ? " multiple" : "";
+        $name = $multiple ? "{$key}[]" : $key;
+        
         return <<<HTML
-        <div class="form-grtoup">
+        <div class="form-group">
         <label for="field{$key}">{$label}</label>
-            <select id="field{$key}" class="{$this->getInputClass($key)}" name="{$key}[]" required multiple>{$optionsHTML}</select>
+            <select id="field{$key}" class="{$this->getInputClass($key)}" name="{$name}" required{$multipleAttr}>{$optionsHTML}</select>
             {$this->getErrorsFeedback($key)}
         </div>
         HTML;

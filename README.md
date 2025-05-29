@@ -41,7 +41,10 @@ git clone https://github.com/Caeles/blog_oc.git
 - Système de commentaires avec modération
 - Interface d'administration sécurisée
 
-
+## Accès à l'administration
+Utilisez les identifiants suivants pour accéder à l'administration:
+- Email: admin@example.com
+- Mot de passe: admin
 
 ## Licence
 Ce projet est distribué sous licence privée et ne peut être utilisé sans autorisation expresse de l'auteur.
