@@ -129,7 +129,7 @@ Ma passion pour la résolution de problèmes me pousse à imaginer des solutions
             <?php endif; ?>
         </div>
         <?php endif; ?>
-        <form action="/src/Actions/send_form.php" method="POST">
+        <form action="/contact" method="POST">
             <input type="text" name="nom" class="form-control mb-3" placeholder="Nom" required>
             <input type="email" name="email" class="form-control mb-3" placeholder="E-mail" required>
             <input type="text" name="sujet" class="form-control mb-3" placeholder="Sujet" required>
