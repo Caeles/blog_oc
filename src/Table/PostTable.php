@@ -111,6 +111,7 @@ final class PostTable extends Table
             'title' => $post->getTitle(),
             'description' => $post->getDescription(),
             'created_at' => $post->getCreatedAt()->format('Y-m-d H:i:s') 
+        ]);
         $post->setId($id);
     }
 
