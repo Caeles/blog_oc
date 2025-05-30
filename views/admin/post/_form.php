@@ -5,7 +5,7 @@
     <?php 
     
      ?>
-    <button class="btn btn-primary">
+    <button class="btn btn-primary mt-3">
         <?php if ($post->getId() !== null) : ?>
             Modifier
         <?php else : ?>

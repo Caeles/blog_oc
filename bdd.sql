@@ -161,7 +161,7 @@ INSERT INTO article (id, author_id, title, chapo, image, description, created_at
     (19,7, 'ERC-4337 : vers des wallets Web3 avec l’UX du Web2', 'Vers des wallets sans seed phrase et des UX dignes du web2.', 'blockchain-erc4337.png','L’ERC-4337, ou account abstraction…','2025-05-14 10:25:35','2025-05-30 00:11:32'),
     (20,8, 'Solana Firedancer : l’ère du client haute performance', 'Un client, en Rust et C, capable de 1 M transactions/s.', 'blockchain-solana-firedancer.gif','Firedancer marque une nouvelle étape…','2025-05-14 10:25:35','2025-05-30 00:10:42');
 
-ALTER TABLE article AUTO_INCREMENT = 21;
+ALTER TABLE article AUTOINCREMENT = 21;
 CREATE INDEX idx_article_created ON article(created_at);
 
 -- --------------------------------------------------------
