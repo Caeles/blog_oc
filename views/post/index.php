@@ -65,8 +65,10 @@ if($currentPage > $pages){
     throw new Exception('Page introuvable', 404);
 }
 $offset=($currentPage - 1) * $perPage;
-$query=$pdo->prepare("SELECT * FROM article ORDER BY created_at DESC LIMIT ? OFFSET ?");
-$query->execute([$perPage, $offset]);
+$query=$pdo->prepare("SELECT * FROM article ORDER BY created_at DESC LIMIT :limit OFFSET :offset");
+$query->bindValue(':limit', $perPage, PDO::PARAM_INT);
+$query->bindValue(':offset', $offset, PDO::PARAM_INT);
+$query->execute();
 $posts=$query->fetchAll(PDO::FETCH_CLASS,Post::class);
 ?>
 <h1>Mes articles de blog</h1>
