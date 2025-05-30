@@ -61,8 +61,9 @@ class PaginatedQuery
         $currentPage = $this->getCurrentPage();
         if ($currentPage === 1) return null;
         if ($currentPage > 2) $link .= "?page=" . ($currentPage - 1);
+        $escapedLink = htmlspecialchars($link, ENT_QUOTES, 'UTF-8');
         return <<<HTML
-            <a href="{$link}" class="btn btn-primary">&laquo; Page précédente</a>
+            <a href="{$escapedLink}" class="btn btn-primary">&laquo; Page précédente</a>
 HTML;
     }
 
@@ -72,8 +73,9 @@ HTML;
         $pages = $this->getPages();
         if ($currentPage >= $pages) return null;
         $link .= "?page=" . ($currentPage + 1);
+        $escapedLink = htmlspecialchars($link, ENT_QUOTES, 'UTF-8');
         return <<<HTML
-            <a href="{$link}" class="btn btn-primary ml-auto">Page suivante &raquo;</a>
+            <a href="{$escapedLink}" class="btn btn-primary ml-auto">Page suivante &raquo;</a>
 HTML;
     }
 }

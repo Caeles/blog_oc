@@ -65,7 +65,8 @@ if($currentPage > $pages){
     throw new Exception('Page introuvable', 404);
 }
 $offset=($currentPage - 1) * $perPage;
-$query=$pdo->query("SELECT * FROM article ORDER BY created_at DESC LIMIT {$perPage} OFFSET {$offset}");
+$query=$pdo->prepare("SELECT * FROM article ORDER BY created_at DESC LIMIT ? OFFSET ?");
+$query->execute([$perPage, $offset]);
 $posts=$query->fetchAll(PDO::FETCH_CLASS,Post::class);
 ?>
 <h1>Mes articles de blog</h1>
@@ -89,7 +90,7 @@ $posts=$query->fetchAll(PDO::FETCH_CLASS,Post::class);
                 $prevLink .= '?page=' . ($currentPage - 1);
             }
         ?>
-        <a href="<?= $prevLink ?>" class="btn btn-primary">
+        <a href="<?= htmlspecialchars($prevLink, ENT_QUOTES, 'UTF-8') ?>" class="btn btn-primary">
             &laquo; Page précédente
         </a>
     <?php endif; ?>
@@ -99,7 +100,7 @@ $posts=$query->fetchAll(PDO::FETCH_CLASS,Post::class);
       
             $nextLink = $router->url('Accueil') . '?page=' . ($currentPage + 1);
         ?>
-        <a href="<?= $nextLink ?>" class="btn btn-primary ml-auto">
+        <a href="<?= htmlspecialchars($nextLink, ENT_QUOTES, 'UTF-8') ?>" class="btn btn-primary ml-auto">
             Page suivante &raquo;
         </a>
     <?php endif; ?> -->
