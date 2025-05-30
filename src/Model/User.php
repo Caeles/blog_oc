@@ -87,7 +87,6 @@ class User
      */
     public function getPassword(): ?string
     {
-        // Return mot_de_passe instead of password since that's what the database uses
         return $this->mot_de_passe;
     }
 
@@ -101,8 +100,7 @@ class User
     public function setPassword(string $password): self
     {
         $this->password = $password;
-        $this->mot_de_passe = $password; // Keep both properties synchronized
-
+        $this->mot_de_passe = $password; 
         return $this;
     }
 

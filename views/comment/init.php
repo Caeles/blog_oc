@@ -31,9 +31,7 @@ $publishedId = $publishedQuery->fetchColumn();
 
 if ($publishedId) {
 
-    /**
-     * Mise à jour des commentaires sans statut
-     */
+  
     $updateQuery = $pdo->prepare("UPDATE comment SET status_id = ? WHERE status_id IS NULL OR status_id = 0");
     $updateQuery->execute([$publishedId]);
     $updated = $updateQuery->rowCount();
@@ -41,9 +39,7 @@ if ($publishedId) {
     echo "<p>{$updated} commentaires ont été publiés.</p>";
     
 
-    /**
-     * Affichage des statistiques des commentaires
-     */
+    
     $countQuery = $pdo->query("SELECT cs.value, COUNT(c.id) as count FROM comment c JOIN comment_status cs ON c.status_id = cs.id GROUP BY cs.value");
     echo "<p>Statistiques des commentaires :</p><ul>";
     while ($row = $countQuery->fetch(PDO::FETCH_ASSOC)) {

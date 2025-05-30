@@ -10,7 +10,7 @@ use App\ObjectHelper;
 use App\Auth;
 use App\Validator;
 
-// Auth::check();
+Auth::check();
 
 $pdo = Connection::getPDO();
 $postTable = new PostTable($pdo);

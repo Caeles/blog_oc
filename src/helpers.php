@@ -25,4 +25,3 @@ function excerpt(string $content, int $limit = 160): string
     return \App\Helpers\Text::excerpt($content, $limit);
 }
 
-// Note: dd() function is already provided by symfony/var-dumper

@@ -4,7 +4,6 @@ use App\Connection;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    // Utiliser htmlspecialchars au lieu de FILTER_SANITIZE_STRING (déprécié)
     $nom = htmlspecialchars($_POST['nom'] ?? '');
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $sujet = htmlspecialchars($_POST['sujet'] ?? '');

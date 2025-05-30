@@ -74,7 +74,6 @@ class Form{
         $optionsHTML = [];
         $value = $this->getValue($key);
         
-        // Convertir la valeur en tableau si ce n'est pas déjà le cas
         if (!is_array($value)) {
             $value = [$value];
         }
@@ -85,7 +84,6 @@ class Form{
         }
         $optionsHTML = implode('', $optionsHTML);
         
-        // Modifier le nom et les attributs en fonction de si c'est un select multiple ou non
         $multipleAttr = $multiple ? " multiple" : "";
         $name = $multiple ? "{$key}[]" : $key;
         

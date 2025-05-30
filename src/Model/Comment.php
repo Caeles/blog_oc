@@ -45,8 +45,7 @@ class Comment
         if ($this->contenu === null) {
             return null;
         }
-        // Appliquer seulement nl2br pour les sauts de ligne, sans htmlentities
-        // pour u00e9viter le double encodage des caractu00e8res spu00e9ciaux
+      
         return nl2br($this->contenu);
     }
 

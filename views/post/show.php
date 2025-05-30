@@ -50,7 +50,7 @@ if (method_exists($post, 'getAuthorId')) {
 <?php foreach ($post->getCategories() as $k => $category): ?>
     <?php if($k > 0): echo ', '; endif; ?>
     <a href="<?= $router->url('category', ['id' => $category->getID(), 'slug' => $category->getSlug()]) ?>"
-       class="badge bg-secondary text-decoration-none">
+       class="badge bg-primary text-white text-decoration-none">
         <?= htmlentities($category->getName()) ?>
     </a>
 <?php endforeach; ?>

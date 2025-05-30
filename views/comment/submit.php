@@ -14,7 +14,6 @@ if (!empty($_POST['contenu'])) {
     $commentTable->initCommentStatus();
     
 
-    // Seulement filtrer contre les injections SQL, pas d'encodage HTML ici
     $username = $_POST['username'] ?? 'Anonyme';
     $contenu = $_POST['contenu'];
 

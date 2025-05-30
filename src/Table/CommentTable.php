@@ -51,7 +51,7 @@ class CommentTable extends Table {
             $comment->setContenu($row['contenu']);
             $comment->setCreatedAt($row['created_at']);
             $comment->setNom($row['nom']);
-            $comment->setUsername($row['nom']); // Pour maintenir la compatibilité
+            $comment->setUsername($row['nom']);
             $comments[] = $comment;
         }
         

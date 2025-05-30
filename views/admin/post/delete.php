@@ -4,7 +4,7 @@ use App\Model\Post;
 use App\Table\PostTable;
 use App\Auth;
 
-//Auth::check();
+Auth::check();
 
 $pdo = Connection::getPDO();
 $table = new PostTable($pdo);
