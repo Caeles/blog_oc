@@ -1,7 +1,9 @@
 <form action="" method="POST">
     <?= $form->input('title', 'Titre') ;?>
-    <?= $form->select('categories_ids', 'Catégories', $categories) ;?>
+    <?= $form->input('chapo', 'Chapô') ;?>
+    <?= $form->select('categories_ids', 'Catégories', $categories, true) ;?>
     <?= $form->textarea('description', 'Contenu') ;?>
+    <?= $form->select('author_id', 'Auteur', $authors) ;?>
     <?php 
     
      ?>

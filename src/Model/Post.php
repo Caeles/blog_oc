@@ -60,6 +60,14 @@ class Post
         if($this->description === null) {
             return null;
         }
+        return $this->description;
+    }
+    
+    public function getFormattedDescription(): ?string
+    {
+        if($this->description === null) {
+            return null;
+        }
         return nl2br($this->description);
     }
     public function getImage(): ?string

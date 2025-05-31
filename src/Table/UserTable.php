@@ -27,4 +27,20 @@ class UserTable extends Table{
         return $result;
     }
 
+    /**
+     * @return array [id => nom complet]
+     */
+    public function list(): array
+    {
+        $users = $this->pdo
+            ->query("SELECT id, nom, prenom FROM {$this->table} WHERE role_id = 1 ORDER BY nom ASC")
+            ->fetchAll(PDO::FETCH_ASSOC);
+        
+        $results = [];
+        foreach($users as $user) {
+            $results[$user['id']] = $user['prenom'] . ' ' . $user['nom'];
+        }
+        return $results;
+    }
+
 }

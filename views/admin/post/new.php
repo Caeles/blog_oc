@@ -3,6 +3,7 @@
 use App\Connection;
 use App\Model\Post;
 use App\Table\PostTable;
+use App\Table\UserTable;
 use App\Validator;
 use App\HTML\Form;
 use App\Validators\PostValidator;
@@ -16,7 +17,9 @@ $errors = [];
 $post = new Post();
 $pdo = Connection::getPDO();
 $categorytable = new CategoryTable($pdo);
+$userTable = new UserTable($pdo);
 $categories = $categorytable->list();
+$authors = $userTable->list();
 date_default_timezone_set('Europe/Paris');
 $post->setCreatedAt(date('Y-m-d H:i:s'));
 
@@ -26,7 +29,7 @@ if(!empty($_POST)){
 
     Validator::lang('fr');
     $v = new PostValidator($_POST, $postTable, $post->getID(), $categories);
-    ObjectHelper::hydrate($post, $_POST, ['title', 'description', 'created_at']);
+    ObjectHelper::hydrate($post, $_POST, ['title', 'chapo', 'description', 'author_id', 'created_at']);
     if($v->validate()){
         $pdo->beginTransaction();
         $postTable->createPost($post);

@@ -109,7 +109,9 @@ final class PostTable extends Table
     {
         $id = $this->create([
             'title' => $post->getTitle(),
+            'chapo' => $post->getChapo(),
             'description' => $post->getDescription(),
+            'author_id' => $post->getAuthorId(),
             'created_at' => $post->getCreatedAt()->format('Y-m-d H:i:s') 
         ]);
         $post->setId($id);
@@ -118,10 +120,16 @@ final class PostTable extends Table
     
        public function updatePost(Post $post): void
 {
-    $query = $this->pdo->prepare("UPDATE {$this->table} SET title = :title, description = :description WHERE id = :id");
+    $description = $post->getDescription();
+    $description = preg_replace('/<\/?(?:br|BR)(?:\s|\/)?>/i', "\n", $description);
+    $description = preg_replace('/\n+/', "\n", $description);
+    
+    $query = $this->pdo->prepare("UPDATE {$this->table} SET title = :title, chapo = :chapo, description = :description, author_id = :author_id WHERE id = :id");
     $ok = $query->execute([
         'title' => $post->getTitle(),
-        'description' => $post->getDescription(),
+        'chapo' => $post->getChapo(),
+        'description' => $description,
+        'author_id' => $post->getAuthorId(),
         'id' => $post->getID()
     ]);
     if ($ok === false) {

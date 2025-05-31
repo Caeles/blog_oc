@@ -27,6 +27,7 @@ class Form{
 
     public function textarea(string $key, string  $label): string {
         $value = $this->getValue($key);
+        $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
         return <<<HTML
         <div class="form-grtoup">
         <label for="field{$key}">{$label}</label>

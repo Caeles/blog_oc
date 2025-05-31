@@ -3,6 +3,7 @@
 use App\Connection;
 use App\Table\CategoryTable;
 use App\Table\PostTable;
+use App\Table\UserTable;
 use App\Validators;
 use App\HTML\Form;
 use App\Validators\PostValidator;
@@ -15,7 +16,9 @@ Auth::check();
 $pdo = Connection::getPDO();
 $postTable = new PostTable($pdo);
 $categorytable = new CategoryTable($pdo);
+$userTable = new UserTable($pdo);
 $categories = $categorytable->list();
+$authors = $userTable->list();
 $post = $postTable->find($params['id']);
 $categorytable->hydratePosts([$post]);
 $success = false;
@@ -25,7 +28,7 @@ $errors = [];
 if(!empty($_POST)){
     Validator::lang('fr');
     $v = new PostValidator($_POST, $postTable, $post->getID(), $categories);
-    ObjectHelper::hydrate($post, $_POST, ['title', 'description', 'created_at']);
+    ObjectHelper::hydrate($post, $_POST, ['title', 'chapo', 'description', 'created_at', 'author_id']);
     if($v->validate()){
         $pdo->beginTransaction();
         $postTable->updatePost($post);
@@ -62,6 +65,6 @@ $form = new Form($post, $errors)
 <?php endif ?>
 
 
-<h1>Editer l'article<?= e($post->getName()) ?></h1>
+<h1>Editer l'article<br><?= e($post->getName()) ?></h1>
 
 <?php require('_form.php') ?>
