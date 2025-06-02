@@ -12,28 +12,12 @@ use App\Table\Table;
 $id = (int)$params['id'];
 $pdo = Connection::getPDO();
 $table = new PostTable($pdo); 
-// $query = $pdo->prepare('SELECT * FROM article WHERE id = :id');
-// $query->execute(['id' => $id]);
-// $query->setFetchMode(PDO::FETCH_CLASS, Post::class);
-// /**@var Post|false */
-// $post = $query->fetch();
-// if ($post === false) {
-//     throw new Exception('Aucun article ne correspond à cet identifiant');
-// }
+
 
 $post = (new PostTable($pdo))->find($id);
 (new CategoryTable($pdo))->hydratePosts([$post]);
 
-// $query = $pdo->prepare('
-// SELECT c.id, c.name
-// FROM article_category ac
-//     JOIN category c ON ac.category_id = c.id
-//     WHERE ac.article_id = :id
-// ');
 
-// $query->execute(['id' => $post->getID()]);
-// $query->setFetchMode(PDO::FETCH_CLASS, \App\Model\Category::class);
-// $categories = $query->fetchAll();
 
 $author = null;
 if (method_exists($post, 'getAuthorId')) {

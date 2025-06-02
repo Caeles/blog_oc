@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $email_subject = "Nouveau message du formulaire de contact: $sujet";
     
-    $email_body = "Vous avez reu00e7u un nouveau message du formulaire de contact.\n\n".
+    $email_body = "Vous avez reçu un nouveau message du formulaire de contact.\n\n".
         "Nom: $nom\n".
         "Email: $email\n".
         "Sujet: $sujet\n".

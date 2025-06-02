@@ -50,46 +50,7 @@ final class PostTable extends Table
             return [$posts,$paginatedQuery];
         }
 
-            // $postsByID = [];
-            // foreach ($posts as $post) {
-            //     $postsByID[$post->getID()] = $post;
-            // }
-            // $categories = this->$pdo->query("SELECT c.*, pc.post_id
-            // FROM post_category pc
-            // JOIN category c ON c.id = pc.category_id
-            // WHERE pc.post_id IN (".implode(',', array_keys($postsByID)).")")->fetchAll(PDO::FETCH_CLASS, Category::class);
-
-            // foreach ($categories as $category) {
-            //     $postsByID[$category->getPostID()]->addCategory($category);
-            // }
-            // return [$posts, $paginatedQuery];
-
-            
-
-
-    //       public function updatePost(Post $post): void
-    // {
-    //     $this->update([
-    //         'title' => $post->getTitle(),
-    //         'description' => $post->getDescription(),
-    //         'created_at' => $post->getCreatedAt()->format('Y-m-d H:i:s') // On converti au bon format en string
-    //     ], $post->getId());
-    // }
-
-
-        // public function find(int $id): Post
-        // {
-        //     $query = $this->pdo->prepare("SELECT * FROM post WHERE id = :id");
-        //     $query->execute(['id' => $id]);
-        //     $query->setFetchMode(PDO::FETCH_CLASS,Post::class);
-        //     $result = $query->fetch();
-        //     if ($result === false) {
-        //         throw new NotFoundException('post', $id);
-        //     }
-        //     return $result;
-        // }
-
-
+           
         
 
 

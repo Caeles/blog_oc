@@ -137,8 +137,9 @@ Ma passion pour la résolution de problèmes me pousse à imaginer des solutions
             <button class="btn btn-primary" type="submit">Envoyer</button>
         </form>
     </section>
-
-    <!-- Footer -->
+<footer>
+</footer>
+<!--     
     <footer class="bg-dark text-white text-center py-3">
         <p class="h4">Céline PIPER</p>
         <div class="mb-2">
@@ -148,7 +149,7 @@ Ma passion pour la résolution de problèmes me pousse à imaginer des solutions
             <a class="nav-link" href="/login">Se Connecter</a>
         </div>
         <p class="small">&copy; PIPER . Tous droits réservés</p>
-    </footer>
+    </footer> -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

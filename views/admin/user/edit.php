@@ -24,20 +24,19 @@ $errors = [];
 $success = false;
 
 if (!empty($_POST)) {
-    $user->setNom($_POST['nom'] ?? '');
-    $user->setPrenom($_POST['prenom'] ?? '');
-    $user->setEmail($_POST['email'] ?? '');
+    // $user->setNom($_POST['nom'] ?? '');
+    // $user->setPrenom($_POST['prenom'] ?? '');
+    // $user->setEmail($_POST['email'] ?? '');
     $user->setRoleId($_POST['role_id'] ?? 0);
     $user->setStatusId($_POST['status_id'] ?? 0);
     
     if (!empty($_POST['password'])) {
-        // Hasher le mot de passe
         $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $user->setPassword($hashedPassword);
     }
     
     if ($userTable->exists('email', $user->getEmail(), $user->getId())) {
-        $errors['email'] = "Cet email est du00e9ju00e0 utilisu00e9 par un autre utilisateur";
+        $errors['email'] = "Cet email est déjà utilisé par un autre utilisateur";
     }
     
     if (empty($errors)) {
@@ -68,6 +67,8 @@ if (!empty($_POST)) {
     }
 }
 
+$user->setPassword('');
+
 $form = new Form($user, $errors);
 
 ?>
@@ -82,15 +83,18 @@ $form = new Form($user, $errors);
 
 <form action="" method="POST">
     <div class="mb-4">
-        <?= $form->input('nom', 'Nom') ?>
+        <label>Nom</label>
+        <div ><?= htmlspecialchars($user->getNom()) ?></div>
     </div>
     
     <div class="mb-4">
-        <?= $form->input('prenom', 'Prénom') ?>
+        <label>Prénom</label>
+        <div "><?= htmlspecialchars($user->getPrenom()) ?></div>
     </div>
     
     <div class="mb-4">
-        <?= $form->input('email', 'Email') ?>
+        <label>Email</label>
+        <div><?= htmlspecialchars($user->getEmail()) ?></div>
     </div>
     
     <div class="mb-4">

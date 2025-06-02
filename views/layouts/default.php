@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= isset($title) ? e($title) : 'Celine PIPER' ?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body class="d-flex flex-column h-100" style="padding-top: 70px;">
     <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -29,14 +29,24 @@
             </div>
         </div>
     </nav>
-    <div class="container mt-5">
+    <div class="container mt-5 mb-5" style="margin-bottom: 30px">
         <?= $content ?>
     </div>
     
-    <footer class="bg-light py-4 footer mt-auto">
+    <!-- <footer class="bg-light py-4 footer mt-auto">
         <div class="container">
             
         </div>
+    </footer> -->
+    <footer class="bg-dark text-white text-center py-3 mt-auto">
+        <p class="h4">Céline PIPER</p>
+        <div class="mb-2">
+            <a href="www.facebook.com" class="text-white mx-2"><i class="bx bxl-facebook"></i></a>
+            <a href="www.instagram.com" class="text-white mx-2"><i class="bx bxl-instagram"></i></a>
+            <a href="www.twitter.com" class="text-white mx-2"><i class="bx bxl-twitter"></i></a>
+            <a class="nav-link" href="/login">Se Connecter</a>
+        </div>
+        <p class="small">&copy; PIPER . Tous droits réservés</p>
     </footer>
 </body>
 </html>

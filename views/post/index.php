@@ -8,24 +8,12 @@ use App\Model\Category;
 use App\Table\PostTable;    
 
 
-$title="Mon Blog";
+$title="Blog";
 $pdo=Connection::getPDO();
-// $paginatedQuery = new PaginatedQuery(
-//     "SELECT * FROM article ORDER BY created_at DESC",
-//     "SELECT COUNT(id) FROM article",
-//     12
-// );
 
 $table =new PostTable($pdo);
 list($posts,$pagination)=$table->findPaginated();
-// $posts=$var[0];
-// $pagination=$var[1];
 
-// $posts = $paginatedQuery->getItems(Post::class);
-// $postsByID = [];
-// foreach ($posts as $post) {
-//     $postsByID[$post->getID()] = $post;
-// }
 $postsByID = [];
 foreach ($posts as $post) {
     $postsByID[$post->getID()] = $post;

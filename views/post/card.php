@@ -12,7 +12,9 @@
         </div>
         <?php endif; ?>
         <h5><?= htmlentities($post->getChapo()) ?></h5>
-        <p class="card-text"><?= $post->getExcerpt() ?></p>
+    
+        <p class="card-text"><?= $post->getExcerpt() ?></p> 
+        <!-- Fonction dans le namespace App\Helpers\Text -->
         <p class="text-muted"><?php
             $dateTime = $post->getCreatedAt();
             $formatter = new IntlDateFormatter(

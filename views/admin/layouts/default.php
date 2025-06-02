@@ -35,8 +35,10 @@
         <?= $content ?>
     </div>
 
-    <footer class="bg-light py-4 footer mt-auto">
-       
+    <footer class="bg-light py-4 footer mt-auto text-center"> 
+
+    <p class="small">&copy; PIPER . Tous droits réservés</p>
+
     </footer>
 </body>
 </html>
